@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VelocidadMovimiento: 400
-  Smooth: 0.4
+  Smooth: 0.2
   fuerzaDeSalto: 300
   Suelo:
     serializedVersion: 2
