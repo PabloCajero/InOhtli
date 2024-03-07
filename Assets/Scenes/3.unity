@@ -153,15 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8787cda641b23ca40affe13abe077aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VelocidadMovimiento: 400
+  MoveSpeed: 400
   Smooth: 0.2
-  fuerzaDeSalto: 300
-  Suelo:
+  JumpForce: 300
+  Floor:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   OperadorSuelo: {fileID: 106053762}
   dimensionesCaja: {x: 1.25, y: 0.35, z: 0}
-  enSuelo: 0
+  inFloor: 0
 --- !u!50 &17510348
 Rigidbody2D:
   serializedVersion: 4
@@ -296,7 +296,7 @@ Transform:
   m_GameObject: {fileID: 17510346}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.34, y: 4.76, z: 0}
+  m_LocalPosition: {x: -0.65, y: 4.83, z: 0}
   m_LocalScale: {x: 4.135905, y: 4.385865, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -315,9 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca11cf3c0bd89a4cb1d03d3c4556f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActualHP: 4
-  MaxHP: 4
-  barraHP: {fileID: 1649419580}
+  CurrentHealth: 0
+  MaxHealth: 0
+  HealthBar: {fileID: 0}
 --- !u!1 &21883724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d585cddda69cfc94a87680ff88ddfd17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiempoEntreHits: 1
+  timeBetweenHits: 0
 --- !u!61 &1474679968
 BoxCollider2D:
   m_ObjectHideFlags: 0

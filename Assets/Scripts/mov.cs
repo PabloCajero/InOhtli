@@ -7,19 +7,19 @@ public class mov : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody2D rb;
-    private float movimientoHorizontal = 0f;
-    [SerializeField] private float VelocidadMovimiento;
+    private float HorizontalMovement = 0f;
+    [SerializeField] private float MoveSpeed;
     [SerializeField] private float Smooth;
     private Vector3 velocidad = Vector3.zero;
     private bool LD = true;
 
 
-    [SerializeField] private float fuerzaDeSalto;
-    [SerializeField] private LayerMask Suelo;
+    [SerializeField] private float JumpForce;
+    [SerializeField] private LayerMask Floor;
     [SerializeField] private Transform OperadorSuelo;
     [SerializeField] private Vector3 dimensionesCaja;
-    [SerializeField] private bool enSuelo;
-    private bool salto=false;
+    [SerializeField] private bool inFloor;
+    private bool Jump=false;
 
     void Start()
     {
@@ -29,43 +29,43 @@ public class mov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movimientoHorizontal = Input.GetAxisRaw("Horizontal") * VelocidadMovimiento;
+        HorizontalMovement = Input.GetAxisRaw("Horizontal") * MoveSpeed;
         if (Input.GetButtonDown("Jump"))
         {
-            salto = true;
+            Jump = true;
         }
     }
     private void FixedUpdate()
     {
-        enSuelo = Physics2D.OverlapBox(OperadorSuelo.position, dimensionesCaja, 0f, Suelo);
-        Mover(movimientoHorizontal*Time.deltaTime,salto);
-        salto = false;
+        inFloor = Physics2D.OverlapBox(OperadorSuelo.position, dimensionesCaja, 0f, Floor);
+        Move(HorizontalMovement*Time.deltaTime,Jump);
+        Jump = false;
     }
 
-    private void Mover(float mover,bool saltar)
+    private void Move(float move,bool jump)
     {
-        Vector3 velocidadObjetivo = new Vector2(mover,rb.velocity.y);
+        Vector3 velocidadObjetivo = new Vector2(move,rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, velocidadObjetivo,ref velocidad,Smooth);
-        if(mover>0 && !LD)
+        if(move>0 && !LD)
         {
-            Girar();
+            Turn();
         }
-        else if(mover<0 && LD)
+        else if(move<0 && LD)
         {
-            Girar();
+            Turn();
         }
-        if(enSuelo && saltar)
+        if(inFloor && jump)
         {
-            enSuelo = false;
-            rb.AddForce(new Vector2(0f, fuerzaDeSalto));
+            inFloor = false;
+            rb.AddForce(new Vector2(0f, JumpForce));
         }
     }
-    private void Girar()
+    private void Turn()
     {
         LD=!LD;
-        Vector3 escala = transform.localScale;
-        escala.x *=-1;
-        transform.localScale= escala;
+        Vector3 scale = transform.localScale;
+        scale.x *=-1;
+        transform.localScale= scale;
     }
     private void OnDrawGizmos()
     {
