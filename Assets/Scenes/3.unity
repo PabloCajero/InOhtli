@@ -158,7 +158,7 @@ MonoBehaviour:
   JumpForce: 300
   Floor:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   OperadorSuelo: {fileID: 106053762}
   dimensionesCaja: {x: 1.25, y: 0.35, z: 0}
   inFloor: 0
@@ -315,9 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ca11cf3c0bd89a4cb1d03d3c4556f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 0
-  MaxHealth: 0
-  HealthBar: {fileID: 0}
+  CurrentHealth: 4
+  MaxHealth: 4
+  HealthBar: {fileID: 1649419580}
 --- !u!1 &21883724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d585cddda69cfc94a87680ff88ddfd17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenHits: 0
+  timeBetweenHits: 1
 --- !u!61 &1474679968
 BoxCollider2D:
   m_ObjectHideFlags: 0
