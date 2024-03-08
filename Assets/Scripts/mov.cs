@@ -19,6 +19,10 @@ public class mov : MonoBehaviour
     [SerializeField] private Transform OperadorSuelo;
     [SerializeField] private Vector3 dimensionesCaja;
     [SerializeField] private bool inFloor;
+    [SerializeField] private bool InPause;
+    [SerializeField] private GameObject PauseMenu;
+    [SerializeField] private GameObject InterfacePaused;
+
     private bool Jump=false;
 
     void Start()
@@ -33,6 +37,16 @@ public class mov : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             Jump = true;
+        }
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (!InPause) {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
         }
     }
     private void FixedUpdate()
@@ -71,5 +85,19 @@ public class mov : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(OperadorSuelo.position, dimensionesCaja);
+    }
+    private void Pause()
+    {
+        Time.timeScale = 0f;
+        PauseMenu.SetActive(true);
+        InterfacePaused.SetActive(false);
+        InPause =true;
+    }
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+        PauseMenu.SetActive(false);
+        InterfacePaused.SetActive(!InterfacePaused.activeSelf);
+        InPause = false;
     }
 }
