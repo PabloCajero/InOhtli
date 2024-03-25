@@ -14,7 +14,7 @@ public class mov : MonoBehaviour
     private bool LD = true;
 
 
-    [SerializeField] private float JumpForce;
+    [SerializeField] public float JumpForce;
     [SerializeField] private LayerMask Floor;
     [SerializeField] private Transform OperadorSuelo;
     [SerializeField] private Vector3 dimensionesCaja;

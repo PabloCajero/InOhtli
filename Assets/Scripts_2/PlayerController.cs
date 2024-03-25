@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Cinemachine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private Vector2 direction;
-    //private CinemachineVirtualCamera vm;
+    private CinemachineVirtualCamera vm;
     private Vector2 MovementDirection;
 
     [Header(("Estadisticas del jugador"))]
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        //vm = GameObject.FindGameObjectWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
+        vm = GameObject.FindGameObjectWithTag("VirtualCamera").GetComponent<CinemachineVirtualCamera>();
     }
     // Start is called before the first frame update
     void Start()
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         return new Vector2(MovementDirection.x, direction.y);
     }
 
-    /*private IEnumerator CameraDamage()
+    private IEnumerator CameraDamage()
     {
         isShaking = true;
         CinemachineBasicMultiChannelPerlin cinemachinebasicmultichannelperlin = vm.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
@@ -99,14 +99,14 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(timeDamage);
         cinemachinebasicmultichannelperlin.m_AmplitudeGain = 0;
         isShaking = false;
-    }*/
+    }
 
     private void Dash(float x, float y)
     {
         animator.SetBool("dash", true);
         Vector3 playerPosition = Camera.main.WorldToViewportPoint(transform.position);
         Camera.main.GetComponent<RippleEffect>().Emit(playerPosition);
-        //StartCoroutine(CameraDamage());
+        StartCoroutine(CameraDamage());
 
         canDash = true;
         rb.velocity = Vector2.zero;
