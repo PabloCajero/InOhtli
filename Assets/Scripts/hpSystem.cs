@@ -16,7 +16,10 @@ public class hpSystem : MonoBehaviour
     public void Damage(float DamageValue)
     {
         CurrentHealth -= DamageValue;
-        HealthBar.ChangeCurrentHealth(CurrentHealth);
+         Debug.Log("Damage: " + DamageValue);
+        if(HealthBar!=null){
+            HealthBar.ChangeCurrentHealth(CurrentHealth);
+        }
         if (CurrentHealth <= 0 )
         {
             Destroy(gameObject);
