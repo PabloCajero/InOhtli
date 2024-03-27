@@ -27,10 +27,16 @@ public class enemyFire : MonoBehaviour
 
         if (playerInRange)
         {
+            
+            if (!enemyBullet.activeSelf)
+            {
+                enemyBullet.SetActive(true);
+            }
             if (Time.time > timeBetween + timeLast)
             {
                 timeLast = Time.time;
                 Invoke(nameof(Shot), waitTime);
+
             }
         }
     }

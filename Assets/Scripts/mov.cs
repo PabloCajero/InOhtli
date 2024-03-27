@@ -69,7 +69,7 @@ public class mov : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.cyan;
         Gizmos.DrawWireCube(OperadorSuelo.position, dimensionesCaja);
     }
 }
