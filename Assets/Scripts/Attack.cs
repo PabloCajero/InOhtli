@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -7,10 +8,22 @@ public class Attack : MonoBehaviour
     [SerializeField] private Transform AttackOperator;
     [SerializeField] private float AttackRadio;
     [SerializeField] private float AttackDamage;
+    [SerializeField] private float TimeBetweenAttack;
+    [SerializeField] private float TimeNextAttack;
+    [SerializeField] private float AttackDuration;
+    private Animator animator;
 
+    private void Start(){
+        animator = GetComponent<Animator>();
+    }
     private void Update(){
-        if(Input.GetKeyDown(KeyCode.E)){
-            CharacterHit();
+        if(TimeNextAttack>0){
+            TimeNextAttack -= Time.deltaTime;
+        }
+        if(Input.GetButtonDown("Fire1") && TimeNextAttack <=0){
+            Invoke("CharacterHit",0.5f);
+            animator.SetTrigger("AttackTrigger");
+            TimeNextAttack=TimeBetweenAttack;
         }
     }
     private void CharacterHit(){
