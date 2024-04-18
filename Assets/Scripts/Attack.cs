@@ -21,7 +21,7 @@ public class Attack : MonoBehaviour
             TimeNextAttack -= Time.deltaTime;
         }
         if(Input.GetButtonDown("Fire1") && TimeNextAttack <=0){
-            Invoke("CharacterHit",0.5f);
+            Invoke("CharacterHit",AttackDuration);
             animator.SetTrigger("AttackTrigger");
             TimeNextAttack=TimeBetweenAttack;
         }

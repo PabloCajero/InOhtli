@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class hpSystem : MonoBehaviour
 {
-    [SerializeField] private float CurrentHealth;
+    [SerializeField] public float CurrentHealth;
     [SerializeField] private float MaxHealth;
     [SerializeField] private HealthBar HealthBar;
 
     private void Start()
     {
-        CurrentHealth = MaxHealth;
+        
     }
 
     public void Damage(float DamageValue)
@@ -36,5 +36,11 @@ public class hpSystem : MonoBehaviour
         {
             CurrentHealth += CureValue;
         }
+    }
+    public void SetHP(float newHP){
+        CurrentHealth=newHP;
+    }
+    public float GetHP(){
+        return CurrentHealth;
     }
 }
