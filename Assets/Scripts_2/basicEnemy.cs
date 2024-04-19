@@ -33,10 +33,7 @@ public class basicEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        /*rb2D = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        target = GameObject.Find("Player");*///idle1
-        //Behavior();
+        
     }
 
     // Update is called once per frame
@@ -68,48 +65,6 @@ public class basicEnemy : MonoBehaviour
         Gizmos.DrawLine(frontController.transform.position, frontController.transform.position + transform.right * frontDistance);
         
     }
-
-
-    /*public void Behavior()
-    {
-        animator.SetBool("run", false);
-        chronometer += 1 * Time.deltaTime;
-        if (chronometer >= 4)
-        {
-            routine = Random.RandomRange(0, 2);
-            chronometer = 0;
-        }
-
-        switch (routine)
-        {
-            case 0:
-                animator.SetBool("Walk", false);
-                break;
-            case 1:
-                direction = Random.Range(0, 2);
-                routine++;
-                break;
-            case 2:
-                switch (direction)
-                {
-                    case 0:
-                        transform.rotation = Quaternion.Euler(0, 0, 0);
-                        transform.Translate(Vector3.right * speed_walk * Time.deltaTime);
-                        break;
-                    case 1:
-                        transform.rotation = Quaternion.Euler(0, 180, 0);
-                        transform.Translate(Vector3.right * speed_walk * Time.deltaTime);
-                        break;
-                }
-                animator.SetBool("walk", true);
-                break;
-        }
-    }*/
-
-
-
-
-
 
 }
 

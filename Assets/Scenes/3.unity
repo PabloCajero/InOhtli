@@ -3149,7 +3149,7 @@ GameObject:
   - component: {fileID: 1895406373}
   m_Layer: 0
   m_Name: shotter
-  m_TagString: Untagged
+  m_TagString: Enemigo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3244,6 +3244,9 @@ MonoBehaviour:
   timeLast: 1.460357
   enemyBullet: {fileID: 1290398276}
   waitTime: 0
+  movementSpeed: 5
+  playerDistance: 14
+  shotDistance: 8
 --- !u!1 &1914089810
 GameObject:
   m_ObjectHideFlags: 0
