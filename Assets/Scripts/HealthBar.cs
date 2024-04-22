@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     private Slider slider;
+    private float startingValue;
     private void Start()
     {
         slider = GetComponent<Slider>();
+        slider.value=startingValue;
     }
 
     public void ChangeMaxHP(float MaxHealth)
@@ -23,5 +25,9 @@ public class HealthBar : MonoBehaviour
     public void StartHealthBar(float HPValue)
     {
         ChangeCurrentHealth(HPValue);
+    }
+
+    public void SetStarterValue(float SetStarter){
+        startingValue=SetStarter;
     }
 }

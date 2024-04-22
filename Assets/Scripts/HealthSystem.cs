@@ -2,36 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class hpSystem : MonoBehaviour
+public class hpSystem : HP
 {
-    [SerializeField] private float CurrentHealth;
-    [SerializeField] private float MaxHealth;
     [SerializeField] private HealthBar HealthBar;
 
-    private void Start()
-    {
-        CurrentHealth = MaxHealth;
+    public void hpBarChange(){
+        HealthBar.ChangeCurrentHealth(getCurrentHP());
     }
 
-    public void Damage(float DamageValue)
-    {
-        CurrentHealth -= DamageValue;
-        HealthBar.ChangeCurrentHealth(CurrentHealth);
-        if (CurrentHealth <= 0 )
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void Cure(float CureValue)
-    {
-        if ((CurrentHealth + CureValue) > CurrentHealth)
-        {
-            CurrentHealth = MaxHealth;
-        }
-        else
-        {
-            CurrentHealth += CureValue;
-        }
+    public void setstartingValue(float startingValue){
+        HealthBar.SetStarterValue(getCurrentHP());
     }
 }
