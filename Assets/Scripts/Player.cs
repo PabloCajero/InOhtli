@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class Player : hpSystem
 {
-    [Header("Menu Setings")]
+    [Header("Menu Settings")]
     [SerializeField] private bool InPause;
     [SerializeField] private GameObject PauseMenu;
     [SerializeField] private GameObject InterfacePaused;
-    [Header("attack Setings")]
+    [Header("attack Settings")]
     [SerializeField] private Transform AttackOperator;
     [SerializeField] private float AttackRadio;
     [SerializeField] private float AttackDamage;
     [SerializeField] private float TimeBetweenAttack;
     [SerializeField] private float TimeNextAttack;
     [SerializeField] private float AttackDuration;
-    private Animator animator;
-    void Start()
+    [Header("Dash Settings")]
+    [SerializeField] private float MaxCharge;
+    [SerializeField] private float TimeCharge;
+    
+    private bool canDash=true;
+    [SerializeField]private float DashTime;
+    [SerializeField]private float DashSpeed;
+    private bool canMove=true;
+
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         setstartingValue(getCurrentHP());
@@ -24,11 +32,18 @@ public class Player : hpSystem
     }
    void Update()
     {
-        
-        HorizontalMovement = Input.GetAxisRaw("Horizontal") * MoveSpeed;
-        if (Input.GetButtonDown("Jump"))
-        {
-            jump = true;
+        if(canMove){
+            HorizontalMovement = Input.GetAxisRaw("Horizontal") * MoveSpeed;
+            if (Input.GetButtonDown("Jump"))
+            {
+                jump = true;
+            }
+            
+            if(Input.GetButtonDown("Fire1") && TimeNextAttack <=0){
+                Invoke("CharacterHit",AttackDuration);
+                //animator.SetTrigger("AttackTrigger");
+                TimeNextAttack=TimeBetweenAttack;
+            }
         }
         if (Input.GetButtonDown("Cancel"))
         {
@@ -43,11 +58,21 @@ public class Player : hpSystem
         if(TimeNextAttack>0){
             TimeNextAttack -= Time.deltaTime;
         }
-        if(Input.GetButtonDown("Fire1") && TimeNextAttack <=0){
-            Invoke("CharacterHit",AttackDuration);
-            //animator.SetTrigger("AttackTrigger");
-            TimeNextAttack=TimeBetweenAttack;
+        if(Input.GetButton("Fire3")){
+            if(TimeCharge<=MaxCharge){
+                TimeCharge += Time.deltaTime;
+            }
         }
+        if(Input.GetButtonUp("Fire3") && canDash){
+            if(TimeCharge>=MaxCharge){
+                StartCoroutine(Dash());
+                Debug.Log("Dasheo");
+            }else{
+                Debug.Log("No Dasheo");
+            }
+            TimeCharge=0;
+        }
+        
     }
     private void CharacterHit(){
         Collider2D[] Objects = Physics2D.OverlapCircleAll(AttackOperator.position, AttackRadio);
@@ -56,6 +81,25 @@ public class Player : hpSystem
                 colition.transform.GetComponent<HP>().Damage(AttackDamage);
             }
         }
+    }
+    private IEnumerator Dash(){
+        canMove=false;
+        canDash=false;
+        float FixedSpeed;
+        if(LD){
+            FixedSpeed= DashSpeed*1;
+        }else{
+            FixedSpeed= DashSpeed*-1;
+        }
+        rb.gravityScale=0;
+        rb.velocity=new Vector2(FixedSpeed,0);
+        //anim
+
+        yield return new WaitForSeconds(DashTime);
+
+        canMove=true;
+        canDash=true;
+        rb.gravityScale=4;
     }
     private void Pause()
     {
